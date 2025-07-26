@@ -1,11 +1,14 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,6 +28,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.myapplication.ui.theme.MyApplicationTheme
@@ -37,31 +42,45 @@ class MainActivity : ComponentActivity() {
             MyApplicationTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     CallButtonsScreen(
-                        modifier = Modifier.padding(innerPadding)
+                        modifier = Modifier.padding(innerPadding),
+                        navigateToCallScreen = { navigateToCallScreen() }
                     )
                 }
             }
         }
     }
+
+    private fun navigateToCallScreen() {
+        val intent = Intent(this, CallScreenActivity::class.java)
+        startActivity(intent)
+    }
 }
 
 @Composable
-fun CallButtonsScreen(modifier: Modifier = Modifier) {
-    Box(
-        modifier = modifier.fillMaxSize()
+fun CallButtonsScreen(modifier: Modifier = Modifier, navigateToCallScreen: () -> Unit) {
+    Column(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
+        // Map Image at the top
+        Image(
+            painter = painterResource(id = R.drawable.map),
+            contentDescription = null,
+            contentScale = ContentScale.FillWidth,
+            modifier = Modifier.fillMaxWidth()
+        )
+
         // Buttons positioned at the bottom
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .align(Alignment.BottomCenter)
                 .padding(16.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             // Call Driver Button
             OutlinedButton(
                 onClick = { 
-                    // TODO: Implement call driver functionality
+                    navigateToCallScreen()
                 },
                 modifier = Modifier
                     .weight(1f)
@@ -82,7 +101,7 @@ fun CallButtonsScreen(modifier: Modifier = Modifier) {
             // Call Support Button
             OutlinedButton(
                 onClick = { 
-                    // TODO: Implement call support functionality
+                    navigateToCallScreen()
                 },
                 modifier = Modifier
                     .weight(1f)
@@ -107,6 +126,6 @@ fun CallButtonsScreen(modifier: Modifier = Modifier) {
 @Composable
 fun CallButtonsPreview() {
     MyApplicationTheme {
-        CallButtonsScreen()
+        CallButtonsScreen(navigateToCallScreen = {})
     }
 }
