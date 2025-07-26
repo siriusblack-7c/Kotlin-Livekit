@@ -65,20 +65,20 @@ fun CallScreen(modifier: Modifier = Modifier, onBack: () -> Unit = {}) {
         }
 
         // Call controls
-        Row(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(32.dp),
-            horizontalArrangement = Arrangement.spacedBy(32.dp)
-        ) {
-            IconButton(onClick = { /* TODO: Implement end call functionality */ }) {
-                Icon(
-                    imageVector = Icons.Default.Call,
-                    contentDescription = "End Call",
-                    tint = MaterialTheme.colorScheme.primary
-                )
-            }
-        }
+//        Row(
+//            modifier = Modifier
+//                .align(Alignment.BottomCenter)
+//                .padding(32.dp),
+//            horizontalArrangement = Arrangement.spacedBy(32.dp)
+//        ) {
+//            IconButton(onClick = { /* TODO: Implement end call functionality */ }) {
+//                Icon(
+//                    imageVector = Icons.Default.Call,
+//                    contentDescription = "End Call",
+//                    tint = MaterialTheme.colorScheme.primary
+//                )
+//            }
+//        }
     }
 }
 
